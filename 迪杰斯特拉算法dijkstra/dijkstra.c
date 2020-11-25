@@ -52,10 +52,9 @@ void DijkstraShortestPath(MGraph G, VertexType V)//Ëã·¨µÄÖ÷³ÌĞò£¬ĞèÒª´«µİÆğÊ¼µÄ¶
 		  int* path = NULL;
 		  unsigned int* dist = NULL;
 		  InitDijkstraArray(G, &visit, &path, &dist, V);			//³õÊ¼»¯
-
-		  int EndPos = -1;			  //¼ÇÂ¼½áÊø¶¥µã
 		  while (!JudgeArray(G, visit))
 		  {
+					int EndPos = -1;			  //¼ÇÂ¼½áÊø¶¥µã
 					unsigned int ShorestEdge = INFINITYSIZE;
 					for (int i = 0; i < G.vexnum; ++i)
 					{
