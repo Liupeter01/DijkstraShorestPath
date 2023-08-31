@@ -46,7 +46,42 @@ BOOL JudgeArray(MGraph G, BOOL* visit)			//判断顶点是否被全部的访问
 		  return flag;
 }
 
-void DijkstraShortestPath(MGraph G, VertexType V)//算法的主程序，需要传递起始的顶点
+void recursive(VertexType *arr,int *path, int prev,int next)
+{
+	if(prev == -1){
+		return;
+	}
+	recursive(arr,path,path[prev],prev);
+	printf("%c->%c ",arr[prev],arr[next]);
+}
+
+void DisplayShorestPath(MGraph G,VertexType *arr,VertexType startpos,int *path)
+{
+	printf("\n--------------display the shortest path route--------------------\n");
+	for(int i = 0 ; i < G.vexnum; ++i){	//
+		if(i != LocateVertex(G,startpos)){
+			int next = i;
+			int prev = path[next];
+
+			recursive(arr,path,path[prev],prev);
+			printf("%c->%c\n",arr[prev],arr[next]);
+		}
+	}
+
+}
+
+void DisplayShortestDistance(MGraph G,VertexType *arr,VertexType startpos,unsigned int *distance)
+{
+	printf("\n--------------display the shortest path distance--------------------\n");
+	printf("%s","startpos->destination_pos:distance\n");
+	for(int i = 0 ; i < G.vexnum; ++i){	//
+		if(i!=LocateVertex(G, startpos) && distance[i]!=INFINITYSIZE){
+			printf("%c->%c:%u\n",startpos,arr[i],distance[i]);
+		}
+	}
+}
+
+void DijkstraShortestPath(MGraph G, VertexType *arr,VertexType V)//算法的主程序，需要传递起始的顶点
 {
 		  BOOL* visit = NULL;
 		  int* path = NULL;
@@ -82,5 +117,9 @@ void DijkstraShortestPath(MGraph G, VertexType V)//算法的主程序，需要�
 							  }
 					}
 		  }
-		  DestroyDijkstraArray(visit, path, dist);
+
+		DisplayShortestDistance(G,arr,V,dist);
+		DisplayShorestPath(G,arr,V,path);
+
+		DestroyDijkstraArray(visit, path, dist);
 }

@@ -26,7 +26,7 @@ int main()
             InsertUnDirectEdgeValue(&Graph, pair[i].VexOne, pair[i].VexTwo, pair[i].distance);
           }
           DisplayGraph(Graph);          //图的输出
-          DijkstraShortestPath(Graph, 'A');
+          DijkstraShortestPath(Graph, arr,'A');
           DestroyGraph(&Graph);         //图的销毁
           return 0;
 }
